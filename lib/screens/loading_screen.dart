@@ -34,12 +34,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
         'https://api.openweathermap.org/data/2.5/forecast?lat=$latitude&lon=$longitude&appid=$apiKey');
 
     var weatherData = await networkHelper.getData();
-    navigate();
+    navigate(weatherData);
   }
 
-  void navigate() {
+  void navigate(dynamic weatherData) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return const LocationScreen();
+      return LocationScreen(
+        locationWeather: weatherData,
+      );
     }));
   }
 
@@ -54,5 +56,3 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
   }
 }
-
-
