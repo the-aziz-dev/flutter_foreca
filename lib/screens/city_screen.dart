@@ -36,28 +36,10 @@ class _CityScreenState extends State<CityScreen> {
               Container(
                 padding: const EdgeInsets.all(20.0),
                 child: const TextField(
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    icon: Icon(
-                      Icons.location_city,
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: Colors.black,
                     ),
-                    hintText: 'Enter City Name',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10.0),
-                      ),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
+                    decoration: kTextFiledInputDecoration),
               ),
               TextButton(
                 onPressed: () {},
