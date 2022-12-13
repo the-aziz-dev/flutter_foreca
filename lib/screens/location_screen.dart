@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_foreca/utilities/constants.dart';
+import 'package:flutter_foreca/screens/city_screen.dart';
 import 'package:flutter_foreca/services/weather.dart';
+import 'package:flutter_foreca/utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key, required this.locationWeather});
@@ -25,12 +26,21 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void updateUI(dynamic weatherData) {
-    double temp = weatherData['list'][0]['main']['temp'];
-    temperature = temp.toInt();
-    weatherMessage = weather.getMessage(temperature);
-    var condition = weatherData['list'][0]['weather'][0]['id'];
-    weatherIcon = weather.getWeatherIcon(condition);
-    cityName = weatherData['city']['name'];
+    setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'Error';
+        weatherMessage = 'Unable to get weather data';
+        cityName = '';
+        return;
+      }
+      double temp = weatherData['list'][0]['main']['temp'];
+      temperature = temp.toInt();
+      weatherMessage = weather.getMessage(temperature);
+      var condition = weatherData['list'][0]['weather'][0]['id'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      cityName = weatherData['city']['name'];
+    });
   }
 
   @override
@@ -57,14 +67,22 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weatherData = await weather.getLocationWeather();
+                      updateUI(weatherData);
+                    },
                     child: const Icon(
                       Icons.near_me,
                       size: 50.0,
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const CityScreen();
+                      }));
+                    },
                     child: const Icon(
                       Icons.location_city,
                       size: 50.0,
