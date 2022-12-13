@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_foreca/screens/location_screen.dart';
-import 'package:flutter_foreca/services/location.dart';
-import 'package:flutter_foreca/services/networking.dart';
+import 'package:flutter_foreca/services/weather.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-const apiKey = '119c85091039a4cdfea5fb1abae83b52';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
@@ -24,20 +21,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   void getLocationData() async {
-    Location location = Location();
-    await location.getCurrentLocation();
-
-    latitude = location.latitude;
-    longitude = location.longitude;
-
-    NetworkHelper networkHelper = NetworkHelper(
-        'https://api.openweathermap.org/data/2.5/forecast?lat=$latitude&lon=$longitude&appid=$apiKey');
-
-    var weatherData = await networkHelper.getData();
-    navigate(weatherData);
+    var weatherData = await WeatherModel().getLocationWeather();
+    navigator(weatherData);
   }
 
-  void navigate(dynamic weatherData) {
+  void navigator(dynamic weatherData) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return LocationScreen(
         locationWeather: weatherData,
@@ -49,10 +37,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-          child: SpinKitDoubleBounce(
-        color: Colors.white,
-        size: 100.0,
-      )),
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100.0,
+        ),
+      ),
     );
   }
 }
