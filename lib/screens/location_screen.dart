@@ -72,8 +72,9 @@ class _LocationScreenState extends State<LocationScreen> {
                       updateUI(weatherData);
                     },
                     child: const Icon(
-                      Icons.near_me,
+                      Icons.near_me_rounded,
                       size: 50.0,
+                      color: Colors.white,
                     ),
                   ),
                   TextButton(
@@ -89,8 +90,9 @@ class _LocationScreenState extends State<LocationScreen> {
                       }
                     },
                     child: const Icon(
-                      Icons.location_city,
+                      Icons.location_city_rounded,
                       size: 50.0,
+                      color: Colors.white,
                     ),
                   ),
                 ],
