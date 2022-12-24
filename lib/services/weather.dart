@@ -1,6 +1,7 @@
 import 'package:flutter_foreca/services/location.dart';
 import 'package:flutter_foreca/services/networking.dart';
 
+//please replace the API key that you got on OpenWeatherMap.
 const apiKey = '119c85091039a4cdfea5fb1abae83b52';
 const openWeatherMapUrl = 'https://api.openweathermap.org/data/2.5/forecast';
 
