@@ -1,4 +1,4 @@
-# Simple Weather app
+# Simple Foreca Weather app
 
 The Foreca app is a simple weather app that shows us the weather condition base on our location. In this application, we have used the [OpenWeatherMap](https://openweathermap.org/api) API. We fetch weather condition data from OpenWeatherMap by the [HTTP](https://pub.dev/packages/http) package, and With the [Geolocator](https://pub.dev/packages/geolocator) package, we work with GPS mobile and can find our current location. Finally, based on our location, we determine which data should come from OpenWeatherMap.
 
